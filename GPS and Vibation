@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Properties Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+   
+    function onDeviceReady() {
+        navigator.notification.vibrate([3000,1000,3000,1000,5000]);
+	}
+    function onSuccess(position) {
+        var element = document.getElementById('geolocation');
+        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+                            'Longitude: ' + position.coords.longitude     + '<br />' +
+                            '<hr />'      + element.innerHTML;
+    }
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+            'message: ' + error.message + 'An error happen, please try later.\n');
+        }
+    var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
+    </script>
+  </head>
+  <body>
+    <p id="geolocation">Watching geolocation...</p>
+  </body>
+</html>
